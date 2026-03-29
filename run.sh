@@ -17,7 +17,7 @@ go mod tidy
 
 cd ../../
 git config --global user.email "yusuf.mohamed.work@gmail.com"
-git config --global user.name "Yusuf Mohamed"
+git config --global user.name "yusuf mohamed"
 
 git add . && git commit -am "proto update" || true
 git tag -fa golang/${SERVICE_NAME}/${RELEASE_VERSION} \
