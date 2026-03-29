@@ -1,0 +1,16 @@
+syntax = "proto3";
+package user;
+
+option go_package = "github.com/Yusufdot101/ripple-proto/golang/user;user";
+
+message VerifyUsersRequest {
+  repeated uint32 ids = 1;
+}
+
+message VerifyUsersResponse {
+  bool all_valid = 1;
+}
+
+service UserService {
+  rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
+}
