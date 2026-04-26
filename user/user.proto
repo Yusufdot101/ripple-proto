@@ -7,10 +7,35 @@ message VerifyUsersRequest {
   repeated uint32 ids = 1;
 }
 
+<<<<<<< HEAD
+=======
+
+message GetUsersRequest {
+  repeated uint32 ids = 1;
+}
+
+message User {
+  uint32 id = 1;
+  string sub = 2;
+  string provider = 3;
+  string name = 4;
+  string email = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message GetUsersResponse {
+  repeated User users = 1;
+}
+
+>>>>>>> 2f3a73f (temporary commit)
 message VerifyUsersResponse {
   bool all_valid = 1;
 }
 
 service UserService {
   rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
+<<<<<<< HEAD
+=======
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse)
+>>>>>>> 2f3a73f (temporary commit)
 }
