@@ -13,47 +13,69 @@ sudo apt-get install -y protobuf-compiler
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
-# ensure PATH includes Go bin
 export PATH="$PATH:$(go env GOPATH)/bin"
 
-# ensure output directory exists
-mkdir -p golang/${SERVICE_NAME}
+# -------------------------
+# version handling
+# -------------------------
+MAJOR_VERSION=$(echo "$RELEASE_VERSION" | grep -oE '^v[0-9]+' || true)
+
+OUT_DIR="golang/${SERVICE_NAME}"
+
+if [ "$MAJOR_VERSION" != "v1" ] && [ -n "$MAJOR_VERSION" ]; then
+  OUT_DIR="golang/${SERVICE_NAME}/${MAJOR_VERSION}"
+fi
+
+echo "Output dir: $OUT_DIR"
+
+mkdir -p "$OUT_DIR"
+
+# -------------------------
 # generate code
+# -------------------------
 protoc \
-  --go_out=./golang \
+  --go_out="$OUT_DIR" \
   --go_opt=paths=source_relative \
-  --go-grpc_out=./golang \
+  --go-grpc_out="$OUT_DIR" \
   --go-grpc_opt=paths=source_relative \
   ./${SERVICE_NAME}/*.proto
 
-# init module if not exists
-cd golang/${SERVICE_NAME}
+# -------------------------
+# go module init
+# -------------------------
+cd "$OUT_DIR"
 
 if [ ! -f "go.mod" ]; then
-  go mod init github.com/Yusufdot101/ripple-proto/golang/${SERVICE_NAME}
+    MODULE_PATH="github.com/Yusufdot101/ripple-proto/golang/${SERVICE_NAME}"
+
+    if [ "$MAJOR_VERSION" != "v1" ] && [ -n "$MAJOR_VERSION" ]; then
+      MODULE_PATH="${MODULE_PATH}/${MAJOR_VERSION}"
+    fi
+
+    go mod init "$MODULE_PATH"
 fi
 
 go mod tidy
-cd ../../
+cd - >/dev/null
 
-# git config
+# -------------------------
+# git commit
+# -------------------------
 git config --global user.email "github-actions@github.com"
 git config --global user.name "github-actions"
 
-# commit changes (if any)
 git add .
 
-# commit might fail if nothing changed — that's fine
 git commit -m "chore: generate ${SERVICE_NAME} proto (${RELEASE_VERSION})" || echo "No changes to commit"
 
 git push origin HEAD:main
 
-# create/update tag
+# -------------------------
+# tag
+# -------------------------
 TAG_NAME="golang/${SERVICE_NAME}/${RELEASE_VERSION}"
 
 git tag -f "$TAG_NAME" -m "$TAG_NAME"
-
-# push tag
 git push origin "refs/tags/$TAG_NAME" --force
 
 echo "✅ Done: $TAG_NAME"
