@@ -30,5 +30,5 @@ message VerifyUsersResponse {
 
 service UserService {
   rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
-  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse)
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
 }
