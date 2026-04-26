@@ -52,5 +52,5 @@ service UserService {
   rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
   rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
-  rpc GetContacts(GetContactsRequest) returns (GetContactsResponse)
+  rpc GetContacts(GetContactsRequest) returns (GetContactsResponse);
 }
