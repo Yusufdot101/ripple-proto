@@ -7,9 +7,6 @@ message VerifyUsersRequest {
   repeated uint32 ids = 1;
 }
 
-<<<<<<< HEAD
-=======
-
 message GetUsersRequest {
   repeated uint32 ids = 1;
 }
@@ -27,15 +24,11 @@ message GetUsersResponse {
   repeated User users = 1;
 }
 
->>>>>>> 2f3a73f (temporary commit)
 message VerifyUsersResponse {
   bool all_valid = 1;
 }
 
 service UserService {
   rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
-<<<<<<< HEAD
-=======
   rpc GetUsers(GetUsersRequest) returns (GetUsersResponse)
->>>>>>> 2f3a73f (temporary commit)
 }
