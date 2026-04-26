@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/Yusufdot101/ripple-proto/golang/user/v3;userpb";
+option go_package = "github.com/Yusufdot101/ripple-proto/golang/user/v4;userpb";
 
 message VerifyUsersRequest {
   repeated uint32 ids = 1;
@@ -38,8 +38,19 @@ message VerifyUsersResponse {
   bool all_valid = 1;
 }
 
+message GetContactsRequest {
+  uint32 user_id = 1;
+  repeated uint32 exclude_ids = 2;
+  string query = 3;
+}
+
+message GetContactsResponse {
+  repeated User users = 1;
+}
+
 service UserService {
   rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
   rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
+  rpc GetContacts(GetContactsRequest) returns (GetContactsResponse)
 }
