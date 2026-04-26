@@ -4,7 +4,7 @@
 // 	protoc        v3.21.12
 // source: user/user.proto
 
-package user
+package userpb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -295,7 +295,7 @@ const file_user_user_proto_rawDesc = "" +
 	"\tall_valid\x18\x01 \x01(\bR\ballValid2\x8c\x01\n" +
 	"\vUserService\x12B\n" +
 	"\vVerifyUsers\x12\x18.user.VerifyUsersRequest\x1a\x19.user.VerifyUsersResponse\x129\n" +
-	"\bGetUsers\x12\x15.user.GetUsersRequest\x1a\x16.user.GetUsersResponseB6Z4github.com/Yusufdot101/ripple-proto/golang/user;userb\x06proto3"
+	"\bGetUsers\x12\x15.user.GetUsersRequest\x1a\x16.user.GetUsersResponseB;Z9github.com/Yusufdot101/ripple-proto/golang/user/v2;userpbb\x06proto3"
 
 var (
 	file_user_user_proto_rawDescOnce sync.Once
