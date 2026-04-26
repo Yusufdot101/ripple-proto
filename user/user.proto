@@ -24,6 +24,15 @@ message GetUsersResponse {
   repeated User users = 1;
 }
 
+message SearchUsersResponse {
+  string query = 1;
+  repeated User users = 2;
+}
+
+message SearchUsersResponse {
+  repeated User users = 1;
+}
+
 message VerifyUsersResponse {
   bool all_valid = 1;
 }
@@ -31,4 +40,5 @@ message VerifyUsersResponse {
 service UserService {
   rpc VerifyUsers(VerifyUsersRequest) returns (VerifyUsersResponse);
   rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
 }
