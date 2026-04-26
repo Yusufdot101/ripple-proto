@@ -232,7 +232,7 @@ func (x *GetUsersResponse) GetUsers() []*User {
 type SearchUsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	Users         []*User                `protobuf:"bytes,2,rep,name=users,proto3" json:"users,omitempty"`
+	Ids           []uint32               `protobuf:"varint,3,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -274,9 +274,9 @@ func (x *SearchUsersRequest) GetQuery() string {
 	return ""
 }
 
-func (x *SearchUsersRequest) GetUsers() []*User {
+func (x *SearchUsersRequest) GetIds() []uint32 {
 	if x != nil {
-		return x.Users
+		return x.Ids
 	}
 	return nil
 }
@@ -386,11 +386,10 @@ const file_user_user_proto_rawDesc = "" +
 	"\x03ids\x18\x01 \x03(\rR\x03ids\"4\n" +
 	"\x10GetUsersResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
-	".user.UserR\x05users\"L\n" +
+	".user.UserR\x05users\"B\n" +
 	"\x12SearchUsersRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x12 \n" +
-	"\x05users\x18\x02 \x03(\v2\n" +
-	".user.UserR\x05users\"7\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x12\x10\n" +
+	"\x03ids\x18\x03 \x03(\rR\x03idsJ\x04\b\x02\x10\x03\"7\n" +
 	"\x13SearchUsersResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
 	".user.UserR\x05users\"2\n" +
@@ -425,19 +424,18 @@ var file_user_user_proto_goTypes = []any{
 }
 var file_user_user_proto_depIdxs = []int32{
 	1, // 0: user.GetUsersResponse.users:type_name -> user.User
-	1, // 1: user.SearchUsersRequest.users:type_name -> user.User
-	1, // 2: user.SearchUsersResponse.users:type_name -> user.User
-	0, // 3: user.UserService.VerifyUsers:input_type -> user.VerifyUsersRequest
-	2, // 4: user.UserService.GetUsers:input_type -> user.GetUsersRequest
-	4, // 5: user.UserService.SearchUsers:input_type -> user.SearchUsersRequest
-	6, // 6: user.UserService.VerifyUsers:output_type -> user.VerifyUsersResponse
-	3, // 7: user.UserService.GetUsers:output_type -> user.GetUsersResponse
-	5, // 8: user.UserService.SearchUsers:output_type -> user.SearchUsersResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	1, // 1: user.SearchUsersResponse.users:type_name -> user.User
+	0, // 2: user.UserService.VerifyUsers:input_type -> user.VerifyUsersRequest
+	2, // 3: user.UserService.GetUsers:input_type -> user.GetUsersRequest
+	4, // 4: user.UserService.SearchUsers:input_type -> user.SearchUsersRequest
+	6, // 5: user.UserService.VerifyUsers:output_type -> user.VerifyUsersResponse
+	3, // 6: user.UserService.GetUsers:output_type -> user.GetUsersResponse
+	5, // 7: user.UserService.SearchUsers:output_type -> user.SearchUsersResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_user_user_proto_init() }
