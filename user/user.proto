@@ -1,7 +1,7 @@
 syntax = "proto3";
 package user;
 
-option go_package = "github.com/Yusufdot101/ripple-proto/golang/user;user";
+option go_package = "github.com/Yusufdot101/ripple-proto/golang/user/v2;userpb";
 
 message VerifyUsersRequest {
   repeated uint32 ids = 1;
